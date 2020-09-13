@@ -13,6 +13,31 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    .star-rating {
+      direction: rtl;
+      display: inline-block;
+      padding: 20px
+    }
+
+    .star-rating input[type=radio] {
+      display: none
+    }
+
+    .star-rating label {
+      color: rgb(133, 142, 192);
+      font-size: 50px;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover~label,
+    .star-rating input[type=radio]:checked~label {
+      color: #ffbf00
+    }
+  </style>
 </head>
 
 <body>
@@ -24,23 +49,53 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <div id="usuario-info" style="display: none">
-        <a class="py-2 d-none d-md-inline-block" id="usuario" href="#"></a>        
+        <a class="py-2 d-none d-md-inline-block" id="usuario" href="#"></a>
       </div>
       <a class="py-2 d-none d-md-inline-block" style="display: none" id="salir">Salir</a>
     </div>
   </nav>
-  
+
   <div class="verProducto">
 
     <div id="info" class="text-center p-4 text-lg-left container mt-5"></div>
     <div class="row text-center text-lg-left pt-2" id="productImagesGallery"></div>
     <div class="text-center p-4 text-lg-left container mt-5" id="comentarios"></div>
-  
+
   </div>
   <div class="text-center p-4 text-lg-left container mt-5" id="nuevoCom" style="display: none">
     <dt> Deja tu opinión acá: </dt>
+
     <textarea class="text-center p-4 text-lg-left container mt-5" id="comment" rows="8" cols="60"></textarea>
-    <button id="envCom" class="btn btn-outline-danger">Enviar</button>
+
+    <div id="nuevaCali" class="star-rating">
+      <input id="star-5" type="radio" name="rating" value="5" />
+      <label for="star-5" title="5 stars">
+        <i class="active fa fa-star"></i>
+      </label>
+
+      <input id="star-4" type="radio" name="rating" value="4" />
+      <label for="star-4" title="4 stars">
+        <i class="active fa fa-star"></i>
+      </label>
+
+      <input id="star-3" type="radio" name="rating" value="3" />
+      <label for="star-3" title="3 stars">
+        <i class="active fa fa-star"></i>
+      </label>
+
+      <input id="star-2" type="radio" name="rating" value="2" />
+      <label for="star-2" title="2 stars">
+        <i class="active fa fa-star"></i>
+      </label>
+
+      <input id="star-1" type="radio" name="rating" value="1" checked />
+      <label for="star-1" title="1 star">
+        <i class="active fa fa-star"></i>
+      </label>
+
+    </div>
+
+    <button id="enviarComentario" class="btn btn-outline-danger float-right">Enviar</button>
   </div>
   <footer class="text-muted">
     <div class="container">

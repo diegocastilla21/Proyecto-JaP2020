@@ -3,13 +3,12 @@ var product = {};
 var comentariosArray = [];
 
 //Funcion que muestra el producto----------------------------------------------------------------
-function showProductInfo(product, comentariosArray) {    
-    
+function showProductInfo(product, comentariosArray) {
     let info = "";
     let imgs = "";
     let comments = "<hr>";
 
-    info +=`
+    info += `
     
     <h3> ${product.name} </h3>
       <hr>
@@ -35,13 +34,11 @@ function showProductInfo(product, comentariosArray) {
 
         <dt> ${"Imágenes ilustrativas"} </dt>
             
-    </dl>`
-    
+    </dl>`;
 
     comments += `<p><strong>${"Comentarios"}</strong></p></br>`;
-    
+
     comentariosArray.forEach(function (comment) {
-        
         comments += `<strong>${comment.user}</strong> dice:<br>
                     <p>${comment.description}</p>`;
         comments += `<sub>${comment.dateTime}</sub><br>`;
@@ -52,22 +49,27 @@ function showProductInfo(product, comentariosArray) {
     document.getElementById("comentarios").innerHTML = comments;
 }
 
-function showImagesGallery(array){
-
+//Funcion para mostrar la galeria de imagenes
+function showImagesGallery(array) {
     let htmlContentToAppend = "";
 
-    for(let i = 0; i < array.length; i++){
+    for (let i = 0; i < array.length; i++) {
         let imageSrc = array[i];
 
-        htmlContentToAppend += `
+        htmlContentToAppend +=
+            `
         <div class="col-lg-3 col-md-4 col-6">
             <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
+                <img class="img-fluid img-thumbnail" src="` +
+            imageSrc +
+            `" alt="">
             </div>
         </div>
-        `
+        `;
 
-        document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
+        document.getElementById(
+            "productImagesGallery"
+        ).innerHTML = htmlContentToAppend;
     }
 }
 
@@ -79,7 +81,7 @@ if (userLogged) {
     document.getElementById("nuevoCom").style = "display: inline-block";
 }
 
-document.getElementById("envCom").addEventListener("click", function () {
+document.getElementById("enviarComentario").addEventListener("click", function () {
     let now = new Date();
 
     let dateTime = `${now.getFullYear()}-${
@@ -88,15 +90,23 @@ document.getElementById("envCom").addEventListener("click", function () {
     dateTime += `${now.getHours()}:${now.getMinutes()}: ${now.getSeconds()}`;
 
     let newComment = {
-        //    score: parseInt(document.getElementById() ),
+        score: parseInt(estrellas()),
         description: document.getElementById("comment").value,
-        user: JSON.parse(localStorage.getItem("usuario-logged")).user,
+        user: JSON.parse(localStorage.getItem("usuario-logged")).username,
         dateTime: dateTime,
     };
     comentariosArray.push(newComment);
     showProductInfo(product, comentariosArray);
 });
 
+function estrellas() {
+    let stars = document.getElementsByName("rating");
+    for (let i = 0; i <= stars.length; i++) {
+        if (stars[i].checked) {
+            return stars[i].value;
+        }
+    }
+}
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
