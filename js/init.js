@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   if (userLog){
     userLog = JSON.parse(userLog);
-    user.innerText = user.innerText + userLog.inputEmail;
+    user.innerText = user.innerText + userLog.username;
     infoUser.style = "display: inline-block";
   }
 
-  document.getElementById("").addEventListener("click", function(e) {
+  document.getElementById("salir").addEventListener("click", function(e) {
     localStorage.removeItem("usuario-logged");
-    window.location = "index.html"
+    window.location = "cover.html"
   });
-}); 
+});
