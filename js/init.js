@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     infoUser.style = "display: inline-block";
   }
 
-  document.getElementById("salir").addEventListener("click", function(e) {
+  document.getElementById("cerrarSesion").addEventListener("click", function(e) {
     localStorage.removeItem("usuario-logged");
     window.location = "index.html"
   });
