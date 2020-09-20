@@ -56,6 +56,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   document.getElementById("salir").addEventListener("click", function(e) {
     localStorage.removeItem("usuario-logged");
-    window.location = "cover.html"
+    window.location = "index.html"
   });
 });
