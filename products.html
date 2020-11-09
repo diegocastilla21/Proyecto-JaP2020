@@ -24,38 +24,61 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <!-- Boton desplegable del usuario -->
       <div class="dropdown">
-        <button class="btn btn-danger dropdown-toggle" type="button" id="usuario-info" style="display: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="usuario-info" style="display: none"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <a class="py-2 d-none d-md-inline-block" id="usuario" href="#"></a>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="cart.html">Mi carrito</a>
-          <a class="dropdown-item" id="cerrarSesion">Cerrar sesión</a>          
+          <a class="dropdown-item" id="cerrarSesion">Cerrar sesión</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Filtros y orden de productos-->
-  <div>
-    <h4>Ordenar productos</h4>
 
-    <h5>Por precio</h5>
-    <button id="costAsc">Precio ascendente</button>
-    <button id="costDesc">Precio descendente</button><br><br>
 
-    <h5>Por relevancia</h5>
-    <button id="relevanciaDesdendente">Relevancia descendente</button><br><br>
-    
-    <div id="filtro-rango-precio">
-      <h5>Precio</h5>
-      <input type="number" placeholder="Mínimo" id="precio-min"><br><br>
-      <input type="number" placeholder="Máximo" id="precio-max"><br><br>
-      <button id="ir">Ir</button>
+  <div class="container">
+    <!-- Filtros y orden de productos-->
+    <div class="row">
+
+      <div class="w-100">
+
+        <h3>Ordenar productos</h3>
+
+      </div>
+
+      <div class="col">
+
+        <h5>Por precio</h5>
+
+        <button id="costAsc" class="m-3 form-control btn btn-secondary">Precio ascendente</button>
+
+        <button id="costDesc" class="m-3 form-control btn btn-secondary">Precio descendente</button><br><br>
+
+      </div>
+
+      <div class="col">
+
+        <h5>Por relevancia</h5>
+        <button id="relevanciaDesdendente" class="m-3 btn btn-secondary">Relevancia descendente</button><br><br>
+      </div>
+
+      <div class="col">
+
+        <div id="filtro-rango-precio">
+          <h5>Precio</h5>
+          <input type="number" class="m-3 form-control" placeholder="Mínimo" id="precio-min"><br><br>
+          <input type="number" class="m-3 form-control" placeholder="Máximo" id="precio-max"><br><br>
+          <button id="ir" class="m-3 btn btn-secondary">Ir</button>
+        </div>
+
+      </div>
+
     </div>
+    <div class="row" id="listaProductos"></div>
   </div>
-
-  <div class="container p-5" id="listaProductos"></div>
   <footer class="text-muted bg-light">
     <div class="container">
       <p class="float-right">
@@ -64,6 +87,7 @@
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
+
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -72,6 +96,7 @@
       <div></div>
       <div></div>
     </div>
+  </div>
   </div>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>

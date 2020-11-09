@@ -27,6 +27,19 @@
         font-size: 3.5rem;
       }
     }
+
+    #infoUsuario {
+      background-color: rgba(73, 124, 182, 0.795);
+    }
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -34,6 +47,7 @@
 </head>
 
 <body>
+
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
       <a class="py-2 d-none d-md-inline-block" href="cover.html">Inicio</a>
@@ -42,25 +56,69 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <!-- Boton desplegable del usuario -->
       <div class="dropdown">
-        <button class="btn btn-danger dropdown-toggle" type="button" id="usuario-info" style="display: none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="usuario-info" style="display: none"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <a class="py-2 d-none d-md-inline-block" id="usuario" href="#"></a>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item disabled" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="cart.html">Mi carrito</a>
-          <a class="dropdown-item" id="cerrarSesion">Cerrar sesión</a>          
+          <a class="dropdown-item" id="cerrarSesion">Cerrar sesión</a>
         </div>
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <br><br>
+
+  <!-- Formulario de ingreso de datos del perfil -->
+  <div id="divPerfilUsuario">    
+
+    <div align=center id="infoUsuario" class="border container p-5">
+
+      <h1 class="main-title" align=left>Mis datos</h1>
+
+      <div class="divImgPerfil">
+
+        <h4 class="subtitle">Imagen de perfil</h4>
+
+        <br>
+
+        <img class="imgPerfil" id="imgPerfil" width="180px" height="180px" src="img/perfil.png" alt="">
+
+        <br><br>
+
+        <input type="text" class="form-control" id="imgUrl" placeholder="URL para la imagen de perfil" type="text">
+
+      </div>
+
+      <br>
+
+      <input class="form-control" id="nombreUsuario" placeholder="Nombres" type="text">
+
+      <br>
+
+      <input class="form-control" id="apellidoUsuario" placeholder="Apellidos" type="text">
+
+      <br>
+
+      <input class="form-control" id="edadUsuario" placeholder="Edad" type="number">
+
+      <br>
+
+      <input class="form-control" id="emailUsuario" placeholder="E-mail" type="email">
+
+      <br>
+
+      <input class="form-control" id="telUsuario" placeholder="Teléfono de contacto" type="number">
+
+      <br>
+
+      <button class="btn btn-primary btn-block" id="btnGuardarDatos">Guardar datos</button>
+
     </div>
   </div>
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
