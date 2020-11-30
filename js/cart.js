@@ -2,7 +2,7 @@ var productsArray = [];
 let PERCENTAGE_SYMBOL = "%";
 let porcentajeEnvio = 0.15;
 
-//Funcion para calculo total de costo de articulos
+//Funcion para el calculo del precio de todos los articulos en el carrito
 function precioTotal() {
   let total = 0;
   let subs = document.getElementsByClassName("subtotal");
@@ -14,7 +14,7 @@ function precioTotal() {
   updateTotalCosts();
 }
 
-//Funcion para calcular el subtotal sin envio
+//Funcion para calcular el precio por cada articulo segun su cantidad
 function calcSubtotal(unitCost, i) {
   let count = parseInt(document.getElementById(`cantidad${i}`).value);
   subtot = unitCost * count;
@@ -23,8 +23,8 @@ function calcSubtotal(unitCost, i) {
   precioTotal();
 }
 
-//Funcion para mostrar compras
-function showCartInfo(array) {
+//Funcion para mostrar articulos en el carrito de compras
+function showProductsCart(array) {
   let contenido = "";
 
   for (let i = 0; i < array.length; i++) {
@@ -61,7 +61,7 @@ function showCartInfo(array) {
   precioTotal();
 }
 
-//Funcion para mostrar las opciones segun que metodo de pago elijo
+//Funcion para mostrar las opciones de pago segun que metodo se elija
 function selecPago() {
   let pagos = document.getElementsByName("datosPago");
 
@@ -76,7 +76,7 @@ function selecPago() {
   }
 }
 
-//Funcion para validar el pago si estan TODOS los campos COMPLETOS
+//Funcion para validar el pago si estan los campos COMPLETOS
 function pagoValido() {
   let numTarjeta = document.getElementById("numTrj").value;
   let titularTarjeta = document.getElementById("titularTrj").value;
@@ -88,43 +88,40 @@ function pagoValido() {
   let pagoValidado = true;
 
   for (var i = 0; i < formaPago.length; i++) {
-    if (formaPago[i].checked && formaPago[i].value == "1") {
+    if (formaPago[i].checked && (formaPago[i].value) == "1") {
       if (numTarjeta == "" || titularTarjeta == "" || cvvTarj == "") {
         pagoValidado = false;
       } else {
         pagoValidado = true;
       }
-    } else if (cuenta == "") {
+    } else if (formaPago[i].checked && (formaPago[i].value) == "2") {
+      if (cuenta == "") {        
       pagoValidado = false;
     } else {
       pagoValidado = true;
     }
   }
   return pagoValidado;
-}
+}}
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts() {
   let productCost = parseInt(document.getElementById("preTotal").innerHTML);
   let costEnviPre = parseInt(document.getElementById("precioEnvio").innerHTML);
-  let comissionCostHTML = parseInt(
-    document.getElementById("comissionText").innerHTML
-  );
-  let totalCostHTML = parseInt(
-    document.getElementById("totalCostText").innerHTML
-  );
+  let porceEnvi = parseInt(document.getElementById("porcentajeEnvio").innerHTML);
+  let totalCost = parseInt(document.getElementById("totalCosto").innerHTML);
 
   let porcenEnvio = porcentajeEnvio * 100 + PERCENTAGE_SYMBOL;
   let costoEnvi = productCost * porcentajeEnvio;
   let totalMasEnvio = productCost + costoEnvi;
 
-  comissionCostHTML.innerHTML = porcenEnvio;
+  porceEnvi.innerHTML = porcenEnvio;
   costEnviPre.innerHTML = costoEnvi;
-  totalCostHTML.innerHTML = totalMasEnvio;
+  totalCost.innerHTML = totalMasEnvio;
 
-  document.getElementById("comissionText").innerHTML = porcenEnvio;
+  document.getElementById("porcentajeEnvio").innerHTML = porcenEnvio;
   document.getElementById("precioEnvio").innerHTML = costoEnvi;
-  document.getElementById("totalCostText").innerHTML = totalMasEnvio;
+  document.getElementById("totalCosto").innerHTML = totalMasEnvio;
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -132,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     if (resultObj.status === "ok") {
       productsArray = resultObj.data.articles;
 
-      showCartInfo(productsArray);
+      showProductsCart(productsArray);
 
       precioTotal();
 
@@ -168,42 +165,42 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
   }
 
-  
-  /*
-  let form = document.getElementById("formadentromodalenmicaso");
+  let form = document.getElementById('formAfueraDireccion');
 
-  form.addEventListener(`submit`, function (event) {
-      event.preventDefault();
-      event.stopPropagation();
+  form.addEventListener('submit', function (e) {
 
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
       if (pagoValido()) {
-        document.getElementById("botondelmodal").classList.remove("btn-dark");
-        document.getElementById("botondelmodal").classList.remove("btn-success");
-        document.getElementById("botondelmodeal").classList.add("btn-danger");
-
-        document.getElementById("alertaMODAL").innerHTML = "Si sale esto, esta bien hecho";
+        document.getElementById("confirmDatosComp").classList.remove("btn-success");
+        document.getElementById("confirmDatosComp").classList.remove("btn-danger");
+        document.getElementById("confirmDatosComp").classList.add("btn-success");
+        document.getElementById("pagar").innerHTML = `
+        <br>
+        <div class="alert alert-success alert-dismissible show" role="alert">
+            <strong>Forma de pago ingresada</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        `;
       } else {
-        event.preventDefault();
-        event.stopPropagation();
-
-        document.getElementById("botondelmodal").classList.remove("btn-dark");
-        document.getElementById("botondelmodal").classList.remove("btn-success");
-        document.getElementById("botondelmodal").classList.add("btn-danger");
-
-        document.getElementById("alertaMODAL").innerHTML = "te faltan datos por ingresar si sale este mensaje";
+        e.preventDefault();
+        e.stopPropagation();
+        document.getElementById("confirmDatosComp").classList.remove("btn-success");
+        document.getElementById("confirmDatosComp").classList.remove("btn-primary");
+        document.getElementById("confirmDatosComp").classList.add("btn-danger");
+        document.getElementById("pagar").innerHTML = `
+                <br>
+                <div class="alert alert-danger alert-dismissible show" role="alert">
+                    <strong>Debe ingresar una forma de pago!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                `;
       }
-    
-      if (pagoValido()) {
-
-        $("#f")
-        document.getElementById("success que no se que lugar es aun").innerHTML = "si muesta este mensaje, esta todo hecho bien";
-      } else {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      form.classList.add(`was-validated`);
-    } 
-  ); */
-
+    }
+  });
 });

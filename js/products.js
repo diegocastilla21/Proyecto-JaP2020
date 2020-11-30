@@ -1,10 +1,11 @@
-//Constantes
+//Constantes para el ordenamiento
 const ORDER_ASC_BY_COST = "cost->COST";
 const ORDER_DESC_BY_COST = "COST->cost";
 const ORDER_DESC_BY_RELEVANCIA = "RELEVANCIA->relevancia";
 
-//Variable
+//Array que contiene a los productos de la lista
 var productsArray = [];
+
 //Variable para filtrado por precio
 var minPre = undefined;
 var maxPre = undefined;
@@ -53,50 +54,40 @@ function showProductsList(array) {
   for (let i = 0; i < array.length; i++) {
     let product = array[i];
 
-    if (
-      (minPre == undefined ||
-        (minPre != undefined && parseInt(product.cost) >= minPre)) &&
-      (maxPre == undefined ||
-        (maxPre != undefined && parseInt(product.cost) <= maxPre))
-    ) {
-      htmlContentToAppend +=
-        `
-            <div class="col-lg-4 col-sm-12">
-            <div class="card my-3">
+    if ((minPre == undefined || (minPre != undefined && parseInt(product.cost) >= minPre)) && (maxPre == undefined || (maxPre != undefined && parseInt(product.cost) <= maxPre))) {
+      
+          htmlContentToAppend += `
+
+        <div class="col-lg-4 col-sm-12">
+          <div class="card my-3">
             <div class="card-body">
-            <a href="product-info.html">
+              <a href="product-info.html">
             
-        <div class="list-group-item list-group-item-action">
-            <div class="">
-                <div class="">
-                    <img src="` +
-        product.imgSrc +
-        `" alt="` +
-        product.description +
-        `" class="img-thumbnail">
-                </div>
-                <div class="">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">` +
-        product.name +
-        " - " +
-        product.currency +
-        " " +
-        product.cost +
-        `</h4>
-                        <small class="text-muted">` +
-        product.soldCount +
-        `  vendidos</small>                      
-                        </div>
-                    <p>` +
-        product.description +
-        `</p>                    
-                </div>
+                              <div class="list-group-item list-group-item-action">
+                                  <div class="">
+                                      <div class="">
+                                          <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                                      </div>
+                                      <div class="">
+
+                                          <div class="d-flex w-100 justify-content-between">
+
+                                              <h4 class="mb-1">` + product.name + " - " + product.currency + " " + product.cost + `</h4>
+
+                                              <small class="text-muted">` + product.soldCount + `  vendidos</small>
+
+                                          </div>
+
+                                          <p>` + product.description + `</p>
+
+                                      </div>
+
+                                  </div>
+
+                              </div>        
+              </a>
             </div>
-        </div>
-        </a>
-        </div>
-        </div>
+          </div>
         </div>
         `;
     }
@@ -139,9 +130,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProductsList(productsArray);
   });
 
-  document
-    .getElementById("relevanciaDesdendente")
-    .addEventListener("click", function () {
+  document.getElementById("relevanciaDesdendente").addEventListener("click", function () {
       //Ordena por relevancia descendente
       productsArray = sortProducts(ORDER_DESC_BY_RELEVANCIA, productsArray);
 
@@ -149,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showProductsList(productsArray);
     });
 
-  // Filtros a partir de rango de precio definido
+      // Filtros a partir de rango de precio definido
   document.getElementById("ir").addEventListener("click", function () {
     minPre = document.getElementById("precio-min").value;
     maxPre = document.getElementById("precio-max").value;
